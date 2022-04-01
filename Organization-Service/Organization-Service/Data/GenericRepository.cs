@@ -27,6 +27,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return _context.Set<T>().Find(id);
     }
     
+    public T Update(T entity)
+    {
+        return _context.Set<T>().Update(entity).Entity;
+    }
+    
     public void Remove(T entity)
     {
         _context.Set<T>().Remove(entity);

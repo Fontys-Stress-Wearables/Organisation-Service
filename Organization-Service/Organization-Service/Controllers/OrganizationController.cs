@@ -27,7 +27,7 @@ public class OrganizationController : Controller
         _mapper = mapper;
     }
 
-    [HttpGet("organizations")]
+    [HttpGet("organizations/getall")]
     public IEnumerable<OrganizationDto> GetOrganizations()
     {
         var organizations = _organizationService.GetAll();
@@ -35,7 +35,7 @@ public class OrganizationController : Controller
         return _mapper.Map<IEnumerable<OrganizationDto>>(organizations);
     }
     
-    [HttpGet("organizations/{id}")]
+    [HttpGet("organizations/get/{id}")]
     public OrganizationDto GetOrganization(string id)
     {
         var organization = _organizationService.GetOrganization(id);
@@ -43,7 +43,7 @@ public class OrganizationController : Controller
         return _mapper.Map<OrganizationDto>(organization);
     }
 
-    [HttpPost("organizations")]
+    [HttpPost("organizations/create")]
     public OrganizationDto CreateOrganization(CreateOrganizationDto organization)
     {
         var organizationData = _organizationService.CreateOrganization(organization.Name);
@@ -52,10 +52,18 @@ public class OrganizationController : Controller
         return _mapper.Map<OrganizationDto>(organizationData);
     }
 
-    [HttpPost("organizations/editname")]
-    public OrganizationDto EditOrganizationName(OrganizationDto organization)
+    [HttpPut("organizations/updatename")]
+    public OrganizationDto UpdateOrganizationName(OrganizationDto organization)
     {
-        var organizationData = _organizationService.EditOrganizationName(organization.Id, organization.Name);
+        var organizationData = _organizationService.UpdateOrganizationName(organization.Id, organization.Name);
+
+        return _mapper.Map<OrganizationDto>(organizationData);
+    }
+    
+    [HttpDelete("organizations/remove/{id}")]
+    public OrganizationDto RemoveOrganization(string id)
+    {
+        var organizationData = _organizationService.RemoveOrganization(id);
 
         return _mapper.Map<OrganizationDto>(organizationData);
     }

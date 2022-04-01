@@ -49,9 +49,8 @@ public class OrganizationService : IOrganizationService
         return organization;
     }
 
-    public Organization EditOrganizationName(string id, string name)
+    public Organization UpdateOrganizationName(string id, string name)
     {
-        
         var organization = _unitOfWork.Organizations.GetById(id);
 
         if (organization == null)
@@ -60,7 +59,22 @@ public class OrganizationService : IOrganizationService
         }
         
         organization.Name = name;
-        _unitOfWork.Organizations.Add(organization);
+        _unitOfWork.Organizations.Update(organization);
+        _unitOfWork.Complete();
+        
+        return organization;
+    }
+    
+    public Organization RemoveOrganization(string id)
+    {
+        var organization = _unitOfWork.Organizations.GetById(id);
+
+        if (organization == null)
+        {
+            throw new NotFoundException($"Organization with id '{id}' doesn't exist.");
+        }
+        
+        _unitOfWork.Organizations.Remove(organization);
         _unitOfWork.Complete();
         
         return organization;

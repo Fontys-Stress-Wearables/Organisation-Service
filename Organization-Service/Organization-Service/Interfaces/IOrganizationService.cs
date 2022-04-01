@@ -10,5 +10,7 @@ public interface IOrganizationService
 
     public Organization CreateOrganization(string name);
 
-    public Organization EditOrganizationName(string id, string name);
+    public Organization UpdateOrganizationName(string id, string name);
+
+    public Organization RemoveOrganization(string id);
 }
