@@ -53,8 +53,16 @@ public class OrganizationService : IOrganizationService
     {
         
         var organization = _unitOfWork.Organizations.GetById(id);
+
+        if (organization == null)
+        {
+            throw new NotFoundException($"Organization with id '{id}' doesn't exist.");
+        }
+        
         organization.Name = name;
+        _unitOfWork.Organizations.Add(organization);
+        _unitOfWork.Complete();
         
-        
+        return organization;
     }
 }

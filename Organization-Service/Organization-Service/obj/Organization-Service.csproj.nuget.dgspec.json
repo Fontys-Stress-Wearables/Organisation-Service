@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\roelw\\Documents\\school\\Fontys\\Semester 6\\Group\\Organisation-Service\\Organization-Service\\Organization-Service\\Organization-Service.csproj": {}
+    "D:\\school\\Fontys\\Semester 6\\Group\\Projects\\Organisation-Service\\Organization-Service\\Organization-Service\\Organization-Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\roelw\\Documents\\school\\Fontys\\Semester 6\\Group\\Organisation-Service\\Organization-Service\\Organization-Service\\Organization-Service.csproj": {
+    "D:\\school\\Fontys\\Semester 6\\Group\\Projects\\Organisation-Service\\Organization-Service\\Organization-Service\\Organization-Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\roelw\\Documents\\school\\Fontys\\Semester 6\\Group\\Organisation-Service\\Organization-Service\\Organization-Service\\Organization-Service.csproj",
+        "projectUniqueName": "D:\\school\\Fontys\\Semester 6\\Group\\Projects\\Organisation-Service\\Organization-Service\\Organization-Service\\Organization-Service.csproj",
         "projectName": "Organization-Service",
-        "projectPath": "C:\\Users\\roelw\\Documents\\school\\Fontys\\Semester 6\\Group\\Organisation-Service\\Organization-Service\\Organization-Service\\Organization-Service.csproj",
-        "packagesPath": "C:\\Users\\roelw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\roelw\\Documents\\school\\Fontys\\Semester 6\\Group\\Organisation-Service\\Organization-Service\\Organization-Service\\obj\\",
+        "projectPath": "D:\\school\\Fontys\\Semester 6\\Group\\Projects\\Organisation-Service\\Organization-Service\\Organization-Service\\Organization-Service.csproj",
+        "packagesPath": "C:\\Users\\roelm\\.nuget\\packages\\",
+        "outputPath": "D:\\school\\Fontys\\Semester 6\\Group\\Projects\\Organisation-Service\\Organization-Service\\Organization-Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\roelw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\roelm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[7.0.0-preview.2.22153.1, )"
             },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[7.0.0-preview.2.22153.1, )"
+            },
             "NATS.Client": {
               "target": "Package",
               "version": "[0.14.5, )"
@@ -55,6 +59,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.0-preview.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

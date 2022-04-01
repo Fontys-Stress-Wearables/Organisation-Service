@@ -1,6 +1,8 @@
-﻿namespace Organization_Service.Interfaces;
+﻿using Organization_Service.Models;
 
-public interface IOrganizationRepository
+namespace Organization_Service.Interfaces;
+
+public interface IOrganizationRepository : IGenericRepository<Organization>
 {
     
 }
