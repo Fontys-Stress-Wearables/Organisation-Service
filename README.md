@@ -1,4 +1,4 @@
-﻿# Patient Group Service
+﻿# Organization Service
 
 ## Introduction
 The Post Service is in charge of managing organizations (adding, updating and removing).
@@ -13,8 +13,8 @@ If there is no NATS service running you can start it along with the other servic
 
 ## Production
 To get the project running in kubernetes there are a couple of steps:
-- build the image for the backend by running `docker build -f Patient-Group-Service/Dockerfile -t <HOST>/patient-group-service:<TAG>`.
-- Push the image to the docker registry by running `docker push <HOST>/patient-group-service:<TAG>`.
+- build the image for the backend by running `docker build -f Organization-Service/Dockerfile -t <HOST>/Organization-service:<TAG>`.
+- Push the image to the docker registry by running `docker push <HOST>/Organization-service:<TAG>`.
 - add the service and the database to kubernetes by running `kubectl apply -f api.yaml -f db.yaml`. 
 If there is no NATS service running you can deploy it along with the other services by running `kubectl apply -f api.yaml -f db.yaml -f nats.yaml`.
 
