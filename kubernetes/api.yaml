@@ -1,0 +1,86 @@
+# deployment
+#
+# set up a deployment for the organization API.
+# for the prototype we can pull the image from the local image registry
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: organization-service
+spec:
+ selector:
+  matchLabels:
+   app: organization-service
+ replicas: 1
+ template:
+  metadata:
+   labels:
+    app: organization-service
+  spec:
+   containers:
+    - name: organization-service
+      image: localhost:5000/organization-service:latest
+
+
+---
+# service
+
+apiVersion: v1
+kind: Service
+metadata:
+ name: organization-service
+spec:
+ selector:
+  app: organization-service
+ ports:
+  - port: 80 # Default port for image
+    targetPort: 80 # Default port for image
+
+---
+# replacePathRegex middleware
+#
+# strips the first part of the request path and rewrites it to match the backend URL
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: organization-service-path-middleware
+spec:
+  replacePathRegex:
+    regex: ^/api/organizations
+    replacement: /organizations
+
+---
+# custom header middleware
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: organization-service-header-middleware
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-For: "/api/organization"
+
+---
+# ingress
+#
+# Sets up an ingress to route traffic to the organization service
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: organization-service
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: default-organization-service-path-middleware@kubernetescrd, default-organization-service-header-middleware@kubernetescrd
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /api/organization
+          pathType: Prefix
+          backend:
+            service:
+              name: organization-service
+              port:
+                number: 80
