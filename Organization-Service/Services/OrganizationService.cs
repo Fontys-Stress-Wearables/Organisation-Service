@@ -49,7 +49,7 @@ public class OrganizationService : IOrganizationService
         return organization;
     }
 
-    public Organization UpdateOrganizationName(string id, string name)
+    public Organization UpdateOrganization(string id, string name)
     {
         var organization = _unitOfWork.Organizations.GetById(id);
 

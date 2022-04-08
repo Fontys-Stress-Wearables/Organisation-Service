@@ -8,6 +8,8 @@ namespace Organization_Service.Controllers;
 
 [ApiController]
 [Produces(MediaTypeNames.Application.Json)]
+[Route("organizations")]
+
 public class OrganizationController : Controller
 {
     private readonly IOrganizationService _organizationService;
@@ -26,7 +28,7 @@ public class OrganizationController : Controller
         _mapper = mapper;
     }
 
-    [HttpGet("organizations")]
+    [HttpGet]
     public IEnumerable<OrganizationDto> GetOrganizations()
     {
         var organizations = _organizationService.GetAll();
@@ -34,7 +36,7 @@ public class OrganizationController : Controller
         return _mapper.Map<IEnumerable<OrganizationDto>>(organizations);
     }
     
-    [HttpPost("organizations")]
+    [HttpPost]
     public OrganizationDto CreateOrganization(CreateOrganizationDto organization)
     {
         var organizationData = _organizationService.CreateOrganization(organization.Name);
@@ -43,7 +45,7 @@ public class OrganizationController : Controller
         return _mapper.Map<OrganizationDto>(organizationData);
     }
     
-    [HttpGet("organizations/{id}")]
+    [HttpGet("{id}")]
     public OrganizationDto GetOrganization(string id)
     {
         var organization = _organizationService.GetOrganization(id);
@@ -51,15 +53,15 @@ public class OrganizationController : Controller
         return _mapper.Map<OrganizationDto>(organization);
     }
 
-    [HttpPut("organizations")]
-    public OrganizationDto UpdateOrganizationName(OrganizationDto organization)
+    [HttpPut("{id}")]
+    public OrganizationDto UpdateOrganization(string id, UpdateOrganizationDto organization)
     {
-        var organizationData = _organizationService.UpdateOrganizationName(organization.Id, organization.Name);
+        var organizationData = _organizationService.UpdateOrganization(id, organization.Name);
 
         return _mapper.Map<OrganizationDto>(organizationData);
     }
     
-    [HttpDelete("organizations/{id}")]
+    [HttpDelete("{id}")]
     public OrganizationDto RemoveOrganization(string id)
     {
         var organizationData = _organizationService.RemoveOrganization(id);
