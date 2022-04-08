@@ -10,9 +10,11 @@ public class UnitOfWork : IUnitOfWork
     {
         _context = context;
         Organizations = new OrganizationRepository(_context);
+        Admins = new OrganizationAdminRepository(_context);
     }
 
     public IOrganizationRepository Organizations { get; }
+    public IOrganizationAdminRepository Admins { get; }
 
     public void Dispose()
     {

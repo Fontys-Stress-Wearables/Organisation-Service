@@ -3,31 +3,30 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Organization_Service.Dtos;
 using Organization_Service.Interfaces;
-using Organization_Service.Models;
 
 namespace Organization_Service.Controllers;
 
 [ApiController]
 [Produces(MediaTypeNames.Application.Json)]
-[Route("[controller]")]
 public class OrganizationController : Controller
 {
     private readonly IOrganizationService _organizationService;
-    private readonly INatsService _natsService;
+    // private readonly INatsService _natsService;
     private readonly IMapper _mapper;
 
     public OrganizationController
     (
-        IOrganizationService organizationService, INatsService natsService,
+        IOrganizationService organizationService,
+        // INatsService natsService,
         IMapper mapper
     )
     {
         _organizationService = organizationService;
-        _natsService = natsService;
+        // _natsService = natsService;
         _mapper = mapper;
     }
 
-    [HttpGet("organizations/getall")]
+    [HttpGet("organizations")]
     public IEnumerable<OrganizationDto> GetOrganizations()
     {
         var organizations = _organizationService.GetAll();
@@ -35,15 +34,7 @@ public class OrganizationController : Controller
         return _mapper.Map<IEnumerable<OrganizationDto>>(organizations);
     }
     
-    [HttpGet("organizations/get/{id}")]
-    public OrganizationDto GetOrganization(string id)
-    {
-        var organization = _organizationService.GetOrganization(id);
-
-        return _mapper.Map<OrganizationDto>(organization);
-    }
-
-    [HttpPost("organizations/create")]
+    [HttpPost("organizations")]
     public OrganizationDto CreateOrganization(CreateOrganizationDto organization)
     {
         var organizationData = _organizationService.CreateOrganization(organization.Name);
@@ -51,8 +42,16 @@ public class OrganizationController : Controller
 
         return _mapper.Map<OrganizationDto>(organizationData);
     }
+    
+    [HttpGet("organizations/{id}")]
+    public OrganizationDto GetOrganization(string id)
+    {
+        var organization = _organizationService.GetOrganization(id);
 
-    [HttpPut("organizations/updatename")]
+        return _mapper.Map<OrganizationDto>(organization);
+    }
+
+    [HttpPut("organizations")]
     public OrganizationDto UpdateOrganizationName(OrganizationDto organization)
     {
         var organizationData = _organizationService.UpdateOrganizationName(organization.Id, organization.Name);
@@ -60,7 +59,7 @@ public class OrganizationController : Controller
         return _mapper.Map<OrganizationDto>(organizationData);
     }
     
-    [HttpDelete("organizations/remove/{id}")]
+    [HttpDelete("organizations/{id}")]
     public OrganizationDto RemoveOrganization(string id)
     {
         var organizationData = _organizationService.RemoveOrganization(id);

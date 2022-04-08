@@ -3,7 +3,7 @@ services:
   organization-postgres:
     image: postgres:14.2
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-test}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-test}
