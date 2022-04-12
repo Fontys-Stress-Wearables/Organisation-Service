@@ -56,7 +56,7 @@ public class OrganizationController : Controller
     [HttpPut("{id}")]
     public OrganizationDto UpdateOrganization(string id, UpdateOrganizationDto organization)
     {
-        var organizationData = _organizationService.UpdateOrganization(id, organization.Name);
+        var organizationData = _organizationService.UpdateOrganizationName(id, organization.Name);
 
         return _mapper.Map<OrganizationDto>(organizationData);
     }
