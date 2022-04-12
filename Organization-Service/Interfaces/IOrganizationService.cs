@@ -12,5 +12,5 @@ public interface IOrganizationService
 
     public Organization UpdateOrganizationName(string id, string name);
 
-    public Organization RemoveOrganization(string id);
+    public void RemoveOrganization(string id);
 }

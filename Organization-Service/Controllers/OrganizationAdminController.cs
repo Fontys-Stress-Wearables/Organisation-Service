@@ -35,8 +35,7 @@ public class OrganizationAdminController
     [HttpPost]
     public OrganizationAdminDto CreateOrganizationAdmin(string organizationId, CreateOrganizationAdminDto organizationAdmin)
     {
-        var organizationAdminData = _organizationAdminService.CreateOrganizationAdmin(organizationId, 
-            organizationAdmin.Name);
+        var organizationAdminData = _organizationAdminService.CreateOrganizationAdmin(organizationId, organizationAdmin.Name);
 
         return _mapper.Map<OrganizationAdminDto>(organizationAdminData);
     }

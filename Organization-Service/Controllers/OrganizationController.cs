@@ -62,10 +62,8 @@ public class OrganizationController : Controller
     }
     
     [HttpDelete("{id}")]
-    public OrganizationDto RemoveOrganization(string id)
+    public void RemoveOrganization(string id)
     {
-        var organizationData = _organizationService.RemoveOrganization(id);
-
-        return _mapper.Map<OrganizationDto>(organizationData);
+        _organizationService.RemoveOrganization(id);
     }
 }

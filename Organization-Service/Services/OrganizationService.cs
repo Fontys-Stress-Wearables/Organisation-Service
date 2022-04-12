@@ -65,7 +65,7 @@ public class OrganizationService : IOrganizationService
         return organization;
     }
 
-    public Organization RemoveOrganization(string id)
+    public void RemoveOrganization(string id)
     {
         var organization = _unitOfWork.Organizations.GetById(id);
 
@@ -76,7 +76,5 @@ public class OrganizationService : IOrganizationService
         
         _unitOfWork.Organizations.Remove(organization);
         _unitOfWork.Complete();
-        
-        return organization;
     }
 }
