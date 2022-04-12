@@ -45,7 +45,7 @@ public class OrganizationAdminService : IOrganizationAdminService
         var organization = GetOrganization(organizationId);
         
         organization.OrganizationAdmins.Add(organizationAdmin);
-        _unitOfWork.Organizationgits.Update(organization);
+        _unitOfWork.Organizations.Update(organization);
         _unitOfWork.Complete();
 
         return organizationAdmin;
