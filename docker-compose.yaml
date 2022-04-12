@@ -3,15 +3,27 @@ services:
   organization-postgres:
     image: postgres:14.2
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-test}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-test}
       POSTGRES_DB: "organization"
-
+    healthcheck:
+      test:
+        [
+         "CMD-SHELL",
+         "pg_isready -U ${POSTGRES_USER:-test} -d organization"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      
   organization-service:
     depends_on:
-      - organization-postgres
+      organization-postgres:
+        condition: service_healthy
+#      nats:
+#        condition: service_started
     build:
       context: .
       dockerfile: Organization-Service/Dockerfile
