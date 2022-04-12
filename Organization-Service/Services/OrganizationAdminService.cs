@@ -27,7 +27,7 @@ public class OrganizationAdminService : IOrganizationAdminService
         return GetAdminFromOrganization(organization, adminId);
     }
 
-    public OrganizationAdmin CreateOrganizationAdmin(string organizationId, string name, Boolean isarchived)
+    public OrganizationAdmin CreateOrganizationAdmin(string organizationId, string name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -37,7 +37,7 @@ public class OrganizationAdminService : IOrganizationAdminService
         var organizationAdmin = new OrganizationAdmin()
         {
             Name = name,
-            IsArchived = isarchived,
+            IsArchived = false,
             Id = Guid.NewGuid().ToString()
         };
         
@@ -45,7 +45,7 @@ public class OrganizationAdminService : IOrganizationAdminService
         var organization = GetOrganization(organizationId);
         
         organization.OrganizationAdmins.Add(organizationAdmin);
-        _unitOfWork.Organizations.Update(organization);
+        _unitOfWork.Organizationgits.Update(organization);
         _unitOfWork.Complete();
 
         return organizationAdmin;
@@ -62,9 +62,6 @@ public class OrganizationAdminService : IOrganizationAdminService
         organizationAdmin.Name = name;
         organizationAdmin.IsArchived = isarchived;
 
-        // var organizationAdmins = organization.OrganizationAdmins;
-        // organizationAdmins.a
-
         organization.OrganizationAdmins.Add(organizationAdmin);
         _unitOfWork.Organizations.Update(organization);
         _unitOfWork.Complete();
@@ -72,7 +69,7 @@ public class OrganizationAdminService : IOrganizationAdminService
         return organizationAdmin;
     }
 
-    public OrganizationAdmin RemoveOrganizationAdmin(string organizationId, string adminId)
+    public void RemoveOrganizationAdmin(string organizationId, string adminId)
     {
         var organization = GetOrganization(organizationId);
 
@@ -81,8 +78,6 @@ public class OrganizationAdminService : IOrganizationAdminService
         organization.OrganizationAdmins.Remove(organizationAdmin);
         _unitOfWork.Organizations.Update(organization);
         _unitOfWork.Complete();
-
-        return organizationAdmin;
     }
 
     private Organization GetOrganization(string id)
