@@ -27,48 +27,45 @@ public class OrganizationAdminService : IOrganizationAdminService
         return GetAdminFromOrganization(organization, adminId);
     }
 
-    public OrganizationAdmin CreateOrganizationAdmin(string organizationId, string name, string emailaddress, Boolean isarchived)
+    public OrganizationAdmin CreateOrganizationAdmin(string organizationId, string name, Boolean isarchived)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
             throw new BadRequestException("Name cannot be empty.");
-        } if (string.IsNullOrWhiteSpace(emailaddress))
-        {
-            throw new BadRequestException("e-mail cannot be empty.");
         }
 
         var organizationAdmin = new OrganizationAdmin()
         {
             Name = name,
-            EmailAddress = emailaddress,
             IsArchived = isarchived,
             Id = Guid.NewGuid().ToString()
         };
-
+        
+        
         var organization = GetOrganization(organizationId);
         
-        organization.OrganizationAdmins.ToList().Add(organizationAdmin);
+        organization.OrganizationAdmins.Add(organizationAdmin);
         _unitOfWork.Organizations.Update(organization);
         _unitOfWork.Complete();
 
         return organizationAdmin;
     }
 
-    public OrganizationAdmin UpdateOrganizationAdmin(
-        string organizationId, string adminId, string name, string emailaddress, Boolean isarchived
-    )
+    public OrganizationAdmin UpdateOrganizationAdmin(string organizationId, string adminId, string name, Boolean isarchived)
     {
         var organization = GetOrganization(organizationId);
 
         var organizationAdmin = GetAdminFromOrganization(organization, adminId);
 
-        organization.OrganizationAdmins.ToList().Remove(organizationAdmin);
+        organization.OrganizationAdmins.Remove(organizationAdmin);
         
         organizationAdmin.Name = name;
-        organizationAdmin.EmailAddress = emailaddress;
         organizationAdmin.IsArchived = isarchived;
 
-        organization.OrganizationAdmins.ToList().Add(organizationAdmin);
+        // var organizationAdmins = organization.OrganizationAdmins;
+        // organizationAdmins.a
+
+        organization.OrganizationAdmins.Add(organizationAdmin);
         _unitOfWork.Organizations.Update(organization);
         _unitOfWork.Complete();
 
@@ -81,7 +78,7 @@ public class OrganizationAdminService : IOrganizationAdminService
 
         var organizationAdmin = GetAdminFromOrganization(organization, adminId);
         
-        organization.OrganizationAdmins.ToList().Remove(organizationAdmin);
+        organization.OrganizationAdmins.Remove(organizationAdmin);
         _unitOfWork.Organizations.Update(organization);
         _unitOfWork.Complete();
 

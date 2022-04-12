@@ -12,7 +12,7 @@ services:
       test:
         [
          "CMD-SHELL",
-         "pg_isready -U ${POSTGRES_USER:-test} -d patientGroup"
+         "pg_isready -U ${POSTGRES_USER:-test} -d organization"
         ]
       interval: 5s
       timeout: 5s
@@ -20,10 +20,10 @@ services:
       
   organization-service:
     depends_on:
-      patient-group-postgres:
+      organization-postgres:
         condition: service_healthy
-      nats:
-        condition: service_started
+#      nats:
+#        condition: service_started
     build:
       context: .
       dockerfile: Organization-Service/Dockerfile

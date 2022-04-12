@@ -36,7 +36,7 @@ public class OrganizationAdminController
     public OrganizationAdminDto CreateOrganizationAdmin(string organizationId, CreateOrganizationAdminDto organizationAdmin)
     {
         var organizationAdminData = _organizationAdminService.CreateOrganizationAdmin(organizationId, 
-            organizationAdmin.Name, organizationAdmin.EmailAddress, organizationAdmin.IsArchived);
+            organizationAdmin.Name, organizationAdmin.IsArchived);
 
         return _mapper.Map<OrganizationAdminDto>(organizationAdminData);
     }
@@ -53,7 +53,7 @@ public class OrganizationAdminController
     public OrganizationAdminDto UpdateOrganizationAdmin(string organizationId, string id, UpdateOrganizationAdminDto organizationAdmin)
     {
         var organizationAdminData = _organizationAdminService.UpdateOrganizationAdmin(
-            organizationId, id, organizationAdmin.Name, organizationAdmin.EmailAddress, organizationAdmin.IsArchived);
+            organizationId, id, organizationAdmin.Name, organizationAdmin.IsArchived);
 
         return _mapper.Map<OrganizationAdminDto>(organizationAdminData);
     }
