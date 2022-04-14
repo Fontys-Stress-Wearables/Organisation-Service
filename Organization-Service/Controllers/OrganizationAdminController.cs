@@ -12,15 +12,18 @@ namespace Organization_Service.Controllers;
 public class OrganizationAdminController
 {
     private readonly IOrganizationAdminService _organizationAdminService;
+    private readonly INatsService _natsService;
     private readonly IMapper _mapper;
 
     public OrganizationAdminController
     (
         IOrganizationAdminService organizationAdminService,
+        INatsService natsService,
         IMapper mapper
     )
     {
         _organizationAdminService = organizationAdminService;
+        _natsService = natsService;
         _mapper = mapper;
     }
     
@@ -36,6 +39,7 @@ public class OrganizationAdminController
     public OrganizationAdminDto CreateOrganizationAdmin(string organizationId, CreateOrganizationAdminDto organizationAdmin)
     {
         var organizationAdminData = _organizationAdminService.CreateOrganizationAdmin(organizationId, organizationAdmin.Name);
+        _natsService.Publish("organization-admin-created", organizationAdminData);
 
         return _mapper.Map<OrganizationAdminDto>(organizationAdminData);
     }
