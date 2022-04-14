@@ -16,12 +16,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          dotnet-version: '6.0.x'
         
       - name: Unit tests
         run: dotnet test --no-restore --verbosity normal
       
       - name: Formatting
-        with:
-          dotnet-version: '6.0.x'
         run: dotnet format --verify-no-changes
       
