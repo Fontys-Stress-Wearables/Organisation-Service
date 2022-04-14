@@ -19,5 +19,4 @@ jobs:
         
       - name: Unit tests
         run: dotnet test --no-restore --verbosity normal
-        run: echo "tests passed"
       
