@@ -2,8 +2,8 @@ version: '3.9'
 services:
   organization-postgres:
     image: postgres:14.2
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-test}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-test}
@@ -11,19 +11,19 @@ services:
     healthcheck:
       test:
         [
-         "CMD-SHELL",
-         "pg_isready -U ${POSTGRES_USER:-test} -d organization"
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-test} -d organization"
         ]
       interval: 5s
       timeout: 5s
       retries: 5
-      
+
   organization-service:
     depends_on:
       organization-postgres:
         condition: service_healthy
-#      nats:
-#        condition: service_started
+      nats:
+        condition: service_started
     build:
       context: .
       dockerfile: Organization-Service/Dockerfile
@@ -34,5 +34,4 @@ services:
 
 networks:
   default:
-    external:
-      name: swsp
+    name: swsp

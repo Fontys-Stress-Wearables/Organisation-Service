@@ -2,9 +2,12 @@
 
 tag="latest"
 host="localhost:5001"
+image_name="organization-service"
+docker_dir="Organization-Service"
+docker_context="."
 skip_rebuild=false
 
-while getopts t:h:sn flag
+while getopts t:h:s flag
 do
     case "${flag}" in
         t) tag=${OPTARG};;
@@ -15,9 +18,10 @@ done
 
 if [ "$skip_rebuild" = false ]; then
     # build backend and push the image to the registry
-    docker build -f Organization-Service/Dockerfile -t $host/organization-service:$tag .
-    docker push $host/organization-service:$tag
+    docker build -f $docker_dir/Dockerfile -t $host/$image_name:$tag $docker_context
+    docker push $host/$image_name:$tag
 fi
+
 
 cd kubernetes
 
