@@ -7,10 +7,12 @@ namespace Organization_Service.Services;
 public class OrganizationService : IOrganizationService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly INatsService _natsService;
 
-    public OrganizationService(IUnitOfWork unitOfWork)
+    public OrganizationService(IUnitOfWork unitOfWork, INatsService natsService)
     {
         _unitOfWork = unitOfWork;
+        _natsService = natsService;
     }
 
     public IEnumerable<Organization> GetAll()
@@ -44,6 +46,8 @@ public class OrganizationService : IOrganizationService
         };
 
         _unitOfWork.Organizations.Add(organization);
+        _natsService.Publish("organization-created", organization);
+        
         _unitOfWork.Complete();
 
         return organization;
@@ -60,6 +64,8 @@ public class OrganizationService : IOrganizationService
         
         organization.Name = name;
         _unitOfWork.Organizations.Update(organization);
+        _natsService.Publish("organization-updated", organization);
+        
         _unitOfWork.Complete();
         
         return organization;
@@ -75,6 +81,8 @@ public class OrganizationService : IOrganizationService
         }
         
         _unitOfWork.Organizations.Remove(organization);
+        _natsService.Publish("organization-removed", organization);
+        
         _unitOfWork.Complete();
     }
 }
