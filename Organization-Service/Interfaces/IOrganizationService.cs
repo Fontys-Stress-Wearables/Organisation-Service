@@ -8,7 +8,7 @@ public interface IOrganizationService
 
     public Organization GetOrganization(string id);
 
-    public Organization CreateOrganization(string name);
+    public Organization CreateOrganization(string id, string name);
 
     public Organization UpdateOrganizationName(string id, string name);
 

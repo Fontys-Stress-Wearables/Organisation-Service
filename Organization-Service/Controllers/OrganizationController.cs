@@ -38,7 +38,7 @@ public class OrganizationController : Controller
     [HttpPost]
     public OrganizationDto CreateOrganization(CreateOrganizationDto organization)
     {
-        var organizationData = _organizationService.CreateOrganization(organization.Name);
+        var organizationData = _organizationService.CreateOrganization(organization.Id, organization.Name);
 
         return _mapper.Map<OrganizationDto>(organizationData);
     }

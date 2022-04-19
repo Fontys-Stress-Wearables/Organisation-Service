@@ -32,17 +32,22 @@ public class OrganizationService : IOrganizationService
         return organization;
     }
 
-    public Organization CreateOrganization(string name)
+    public Organization CreateOrganization(string id, string name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
             throw new BadRequestException("Name cannot be empty.");
         }
+        
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            throw new BadRequestException("Id cannot be empty.");
+        }
 
         var organization = new Organization()
         {
             Name = name,
-            Id = Guid.NewGuid().ToString()
+            Id = id
         };
 
         _unitOfWork.Organizations.Add(organization);
