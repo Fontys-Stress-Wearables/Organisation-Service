@@ -5,8 +5,12 @@ using Organization_Service.Services;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using Organization_Service.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
 // Add services to the container.
 builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -49,9 +53,6 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
         .UseLazyLoadingProxies()
         .UseNpgsql(builder.Configuration.GetConnectionString("OrganizationContext") ?? string.Empty));
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
@@ -75,7 +76,10 @@ app.UseHttpsRedirection();
 
 app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseOrganizationAuthorization();
 
 app.MapControllers();
 

@@ -26,7 +26,7 @@ public class OrganizationAuthorizationMiddleware
 
         if (tenant!=_configuration["tenant"])
         {
-            throw new NotFoundException("tenant not found");
+            throw new UnauthorizedException("tenant not found");
         }
 
         await _next(context);
