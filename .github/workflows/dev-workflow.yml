@@ -23,5 +23,6 @@ jobs:
         run: dotnet test --no-restore --verbosity normal
       
       - name: Formatting
+        continue-on-error: true
         run: dotnet format --verify-no-changes
       
