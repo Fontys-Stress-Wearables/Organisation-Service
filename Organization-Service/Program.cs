@@ -11,7 +11,6 @@ builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericReposi
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddTransient<IOrganizationService, OrganizationService>();
-builder.Services.AddTransient<IOrganizationAdminService, OrganizationAdminService>();
 builder.Services.AddTransient<INatsService, NatsService>();
 
 builder.Services.AddCors();
