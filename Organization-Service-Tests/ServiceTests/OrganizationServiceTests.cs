@@ -7,5 +7,7 @@ public class OrganziationServiceTests
     [Fact]
     public void GetAllTest()
     {
+        // Arrange
+        Assert.Equal(true, true);
     }
 }
