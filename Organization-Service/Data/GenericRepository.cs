@@ -1,7 +1,7 @@
 ﻿using Organization_Service.Data;
 using Organization_Service.Interfaces;
 
-namespace technology_poc.Data;
+namespace Organization_Service.Data;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
