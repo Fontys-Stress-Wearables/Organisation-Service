@@ -47,6 +47,8 @@ builder.Services.AddSwaggerGen(setup =>
     });
 });
 
+builder.Services.AddHostedService<HeartBeatService>();
+
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options
         .UseLazyLoadingProxies()
