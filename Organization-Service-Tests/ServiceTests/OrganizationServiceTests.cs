@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using Moq;
 using Newtonsoft.Json;
-using Organization_Service.Data;
 using Organization_Service.Exceptions;
 using Organization_Service.Interfaces;
 using Organization_Service.Models;
 using Organization_Service.Services;
 using Xunit;
 
-namespace Organization_Service_Tests;
+namespace Organization_Service_Tests.ServiceTests;
 
 public class OrganizationServiceTests
 {
