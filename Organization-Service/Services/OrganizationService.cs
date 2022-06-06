@@ -51,7 +51,8 @@ public class OrganizationService : IOrganizationService
         };
 
         _unitOfWork.Organizations.Add(organization);
-        _natsService.Publish("organization-created", organization);
+        _natsService.Publish("organization-created","", organization);
+        _natsService.Publish("th-logs","", $"Organization created with ID: '{organization.Id}.'");
         
         _unitOfWork.Complete();
 
@@ -69,7 +70,8 @@ public class OrganizationService : IOrganizationService
         
         organization.Name = name;
         _unitOfWork.Organizations.Update(organization);
-        _natsService.Publish("organization-updated", organization);
+        _natsService.Publish("organization-updated","", organization);
+        _natsService.Publish("th-logs","", $"Organization updated with ID: '{organization.Id}.'");
         
         _unitOfWork.Complete();
         
@@ -86,8 +88,8 @@ public class OrganizationService : IOrganizationService
         }
         
         _unitOfWork.Organizations.Remove(organization);
-        _natsService.Publish("organization-removed", organization);
-        
+        _natsService.Publish("organization-removed","", organization);
+        _natsService.Publish("th-logs","", $"Organization removed with ID: '{organization.Id}.'");
         _unitOfWork.Complete();
     }
 }
