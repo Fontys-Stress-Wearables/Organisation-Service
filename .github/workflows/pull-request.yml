@@ -35,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: organization-artifact
-        path: /home/runner/work/Organization-Service/Organization-Service/release/
+        path: /home/runner/work/Organisation-Service/Organisation-Service/release/
 
   analyse:
     name: Unit Tests
@@ -49,7 +49,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: organization-artifact
-          path: /home/runner/work/Organization-Service/Organization-Service/release/
+          path: /home/runner/work/Organisation-Service/Organisation-Service/release/
       
       - name: Test
         run: dotnet test --no-restore --verbosity normal
