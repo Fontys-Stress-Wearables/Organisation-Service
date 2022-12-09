@@ -34,7 +34,7 @@ jobs:
     - name: Persist workflow data as artifact
       uses: actions/upload-artifact@v3
       with:
-        name: organization-artifact
+        name: Organisation-artifact
         path: /home/runner/work/Organisation-Service/Organisation-Service/release/
 
   analyse:
@@ -48,7 +48,7 @@ jobs:
       - name: Download workflow data
         uses: actions/download-artifact@v3
         with:
-          name: organization-artifact
+          name: Organisation-artifact
           path: /home/runner/work/Organisation-Service/Organisation-Service/release/
       
       - name: Test
